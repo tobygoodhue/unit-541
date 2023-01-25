@@ -7,9 +7,9 @@ public class UtDMovingPlatform : MonoBehaviour
     public float speed; // Speed at which platform moves
     public Transform startPoint; // Starting point
     public Transform endPoint; // Ending point
-    public bool toStart;
-    public bool togglable;
-    public bool move;
+    public bool toStart; // Whether or not platform should move to start position
+    public bool togglable; // Whether or not the platform's movement can be toggled
+    public bool move; // Whether or not the platform should move
 
     // Start is called before the first frame update
     void Start()
@@ -20,35 +20,35 @@ public class UtDMovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(toStart && move)
+        if(toStart && move) // Check if platform should move to startPoint, and should be moving
         {
-            if (Vector3.Distance(transform.position, startPoint.position) >= .1f)
+            if (Vector3.Distance(transform.position, startPoint.position) >= .1f) // Check if platform is greater than or equal to .1m from startPoint
             {
-                transform.position -= transform.up * speed * Time.deltaTime;
+                transform.position -= transform.up * speed * Time.deltaTime; // Move platform towards startPoint
             }
         }
 
-        if(!toStart && move)
+        if(!toStart && move) // Check if platform should move to endPoint, and should be moving
         {
-            if(Vector3.Distance(transform.position, endPoint.position) >= .1f)
+            if(Vector3.Distance(transform.position, endPoint.position) >= .1f) // Check if platform is greater than or equal to .1m from endPoint
             {
-                transform.position += transform.up * speed * Time.deltaTime;
+                transform.position += transform.up * speed * Time.deltaTime; // Move platform towards endPoint
             }
         }
 
-        if(Vector3.Distance(transform.position, startPoint.position) <= .1f && move && !togglable)
+        if(Vector3.Distance(transform.position, startPoint.position) <= .1f && move && !togglable) // Check if platform is within .1m of of startPoint, should move, and isn't togglable
         {
-            toStart = false;
+            toStart = false; // Move towards endPoint
         }
 
-        if (Vector3.Distance(transform.position, endPoint.position) <= .1f && move && !togglable)
+        if (Vector3.Distance(transform.position, endPoint.position) <= .1f && move && !togglable) // Check if platform is within 1.m of endPoint, should move, and isn't togglable
         {
-            toStart = true;
+            toStart = true; // Move towards startPoint
         }       
     }
 
     public void ToggleMove()
     {
-        move = !move;
+        move = !move; // Toggle move bool
     }
 }

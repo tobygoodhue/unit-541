@@ -19,7 +19,7 @@ public class Narrator : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.N))
+        if(Input.GetKeyDown(KeyCode.N)) // Stop all diaglogue playing (For debugging purposes)
         {
             source.clip = null;
         }
