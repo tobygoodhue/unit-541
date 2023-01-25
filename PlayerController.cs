@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity += transform.right * speed * Time.deltaTime; // Right movement
         }
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift)) // Check if player is sprinting
         {
             maxVel = sprintMaxVel;
         }
@@ -206,8 +206,8 @@ public class PlayerController : MonoBehaviour
                 canInteract = false;
             }
 
-            curHoldDist += Input.mouseScrollDelta.y * holdDistMouseMult;
-            curHoldDist = Mathf.Clamp(curHoldDist, minHoldDist, maxHoldDist);
+            curHoldDist += Input.mouseScrollDelta.y * holdDistMouseMult; // Apply mouse wheel rotation to held object, to move it closer to, and further from camera
+            curHoldDist = Mathf.Clamp(curHoldDist, minHoldDist, maxHoldDist); // Clamp held object distance from camera
 
             Rigidbody hrb = currentHeld.GetComponent<Rigidbody>(); // Assign the object's Rigidbody as hrb (Held Rigidbody)
 
@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator DelayDrop()
     {
         canDrop = false;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f); // Delay player being allowed to drop held object (Fix to a bug where player couldn't pick up objects, because it was detecting the click to pick up, and dropping the held object immediately)
         canDrop = true;
     }
 
